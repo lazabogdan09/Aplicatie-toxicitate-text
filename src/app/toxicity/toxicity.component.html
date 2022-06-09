@@ -1,0 +1,42 @@
+<div class="p-grid p-justify-center">
+    <div class="p-col-12 p-lg-8 p-sm-12 p-md-12">
+        <p-card header="Toxicity Detection - Licenta Laza Bogdan">
+            <div class="p-col-12 p-sm-12 p-md-12">
+                <h3>Introduceti mesajul (doar in engleza)</h3>
+                <textarea
+                        rows="1"
+                        [formControl]="message"
+                        cols="30"
+                        pInputTextarea
+                        autoResize="autoResize">
+                </textarea>
+                <p-message
+                        *ngIf="message.touched && message.errors?.required"
+                        severity="error"
+                        text="Field is required">
+                </p-message>
+                <p-message
+                        *ngIf="message.value.includes('fuck') || message.value.includes('idiot') || message.value.includes('suck') || message.value.includes('stupid')"
+                        severity="error"
+                        text="Text is toxic, watch your language!">
+                </p-message>
+
+            </div>
+            <div class="p-col-12 p-sm-12 p-md-12">
+                <button
+                        pButton
+                        (click)="check()"
+                        type="button"
+                        label="{{loading ? 'Loading' : 'Check'}}"
+                        class="ui-button-raised">
+                </button>
+            </div>
+            <div class="p-col-12 p-sm-12 p-md-12">
+                <p-chart
+                        *ngIf="data && !loading"
+                        type="radar"
+                        [data]="data"></p-chart>
+            </div>
+        </p-card>
+    </div>
+</div>
